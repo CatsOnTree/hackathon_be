@@ -1,4 +1,5 @@
 HELP.md
+.env
 target/
 uploads/
 .mvn/wrapper/maven-wrapper.jar

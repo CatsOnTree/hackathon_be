@@ -8,6 +8,7 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.servers.Server;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,6 +21,12 @@ import org.springframework.context.annotation.Configuration;
 )
 public class OpenApiConfig {
 
+    private final String apiServerUrl;
+
+    public OpenApiConfig(@Value("${app.api-cors-url}") String apiServerUrl) {
+        this.apiServerUrl = apiServerUrl;
+    }
+
     @Bean
     public OpenAPI recruitmentEventOpenApi() {
         return new OpenAPI()
@@ -27,7 +34,7 @@ public class OpenApiConfig {
                         .title("AI Recruitment Event Platform API")
                         .version("v1")
                         .description("Demo-ready backend for recruitment events, participants, squads, attendance, feedback, and email logs."))
-                .servers(List.of(new Server().url("http://localhost:8080").description("Local server")))
+                .servers(List.of(new Server().url(apiServerUrl).description("Configured server")))
                 .components(new Components().addSecuritySchemes("Bearer Authentication",
                         new io.swagger.v3.oas.models.security.SecurityScheme()
                                 .type(io.swagger.v3.oas.models.security.SecurityScheme.Type.HTTP)
