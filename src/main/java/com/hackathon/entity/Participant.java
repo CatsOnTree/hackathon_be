@@ -1,5 +1,6 @@
 package com.hackathon.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -35,7 +36,12 @@ public class Participant {
     private String resumeUrl;
     private String photoUrl;
     private Integer aiScore;
+
+    @Column(columnDefinition = "TEXT")
     private String skills;
+
+    @Column(columnDefinition = "TEXT")
+    private String resumeAnalysisJson;
 
     @Enumerated(EnumType.STRING)
     private ParticipantStatus status;

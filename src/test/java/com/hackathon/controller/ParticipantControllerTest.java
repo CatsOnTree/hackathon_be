@@ -13,16 +13,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hackathon.dto.ParticipantRegistrationRequest;
 import com.hackathon.entity.Participant;
 import com.hackathon.entity.ParticipantStatus;
+import com.hackathon.security.CustomUserDetailsService;
+import com.hackathon.security.JwtAuthenticationFilter;
 import com.hackathon.service.ParticipantService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(ParticipantController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class ParticipantControllerTest {
 
     @Autowired
@@ -33,6 +37,12 @@ class ParticipantControllerTest {
 
     @MockBean
     private ParticipantService participantService;
+
+    @MockBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @MockBean
+    private CustomUserDetailsService userDetailsService;
 
     @Test
     void registerAcceptsMultipartFormDataWithFiles() throws Exception {
