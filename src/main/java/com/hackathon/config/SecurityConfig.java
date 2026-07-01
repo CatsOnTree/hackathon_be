@@ -26,8 +26,8 @@ public class SecurityConfig {
     private final CorsConfigurationSource corsConfigurationSource;
 
     public SecurityConfig(CustomUserDetailsService userDetailsService,
-                          JwtAuthenticationFilter jwtAuthenticationFilter,
-                          CorsConfigurationSource corsConfigurationSource) {
+            JwtAuthenticationFilter jwtAuthenticationFilter,
+            CorsConfigurationSource corsConfigurationSource) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.corsConfigurationSource = corsConfigurationSource;
@@ -44,23 +44,23 @@ public class SecurityConfig {
                                 "/api/participants/register",
                                 "/api/events",
                                 "/api/events/*",
+                                "/api/system/keep-alive",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
-                                "/v3/api-docs/**"
-                        ).permitAll()
+                                "/v3/api-docs/**")
+                        .permitAll()
                         .requestMatchers(
                                 "/api/dashboard/**",
                                 "/api/panelists/**",
                                 "/api/assignments/**",
                                 "/api/squads/**",
-                                "/api/auth/register"
-                        ).hasRole("ADMIN")
+                                "/api/auth/register")
+                        .hasRole("ADMIN")
                         .requestMatchers(
                                 "/api/participants/**",
-                                "/api/feedback/**"
-                        ).hasAnyRole("ADMIN", "PANELIST")
-                        .anyRequest().authenticated()
-                )
+                                "/api/feedback/**")
+                        .hasAnyRole("ADMIN", "PANELIST")
+                        .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -77,7 +77,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
