@@ -18,7 +18,7 @@ public class EventService {
     private final String baseUrl;
 
     public EventService(EventRepository eventRepository, QrCodeService qrCodeService,
-                        @Value("${app.base-url}") String baseUrl) {
+                        @Value("${app.base-qr-url}") String baseUrl) {
         this.eventRepository = eventRepository;
         this.qrCodeService = qrCodeService;
         this.baseUrl = baseUrl;

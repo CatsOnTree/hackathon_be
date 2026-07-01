@@ -48,7 +48,7 @@ public class DataLoader implements CommandLineRunner {
                       FeedbackRepository feedbackRepository, SquadRepository squadRepository,
                       SquadMemberRepository squadMemberRepository, AttendanceRepository attendanceRepository,
                       EmailLogRepository emailLogRepository, QrCodeService qrCodeService,
-                      @Value("${app.base-url}") String baseUrl) {
+                      @Value("${app.base-qr-url}") String baseUrl) {
         this.eventRepository = eventRepository;
         this.participantRepository = participantRepository;
         this.panelistRepository = panelistRepository;

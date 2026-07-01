@@ -24,6 +24,7 @@ public class OpenApiConfig {
     private final String apiServerUrl;
 
     public OpenApiConfig(@Value("${app.api-cors-url}") String apiServerUrl) {
+        System.out.println("api cors url in openapi config: " + apiServerUrl);
         this.apiServerUrl = apiServerUrl;
     }
 
